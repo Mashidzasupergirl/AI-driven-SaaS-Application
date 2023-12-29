@@ -1,8 +1,6 @@
 from openai import OpenAI
 import argparse
 
- 
-
 
 def main():
     print("Recipehelper is running!")
@@ -10,11 +8,10 @@ def main():
     parser.add_argument("--input", "-i", type=str, required=True)
     args = parser.parse_args()
     user_input = args.input
-
-    print("List of products from input:", user_input)
+    
+    # print("List of products from input:", user_input)
     generate_recipe(user_input)
 
-    pass
 
 def generate_recipe(prompt: str):
     client = OpenAI()
@@ -24,16 +21,15 @@ def generate_recipe(prompt: str):
     completion = client.chat.completions.create(
     model="gpt-3.5-turbo",
     messages=[
-        {"role": "system", "content": "You are a generetor of recipe for a written products"},
-        {"role": "user", "content": f'{subject}'}
+        {"role": "system", "content": "You are a generetor of recipe for given products"},
+        {"role": "user", "content": f'I have only these products: {subject}. Suggest me a recipe only for these products, I do not want to go to the store.'},
     ]
     )
     AI_answer = completion.choices[0].message
-
-    recipe_name = AI_answer.content.split('\n')[0].split(': ')[-1]
-
-    print(recipe_name, 'recipe name')
-    pass
+    recipe = AI_answer.content
+    # print(recipe, 'recipe')
+    return recipe
+    
 
 
 if __name__ == "__main__":
