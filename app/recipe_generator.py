@@ -8,7 +8,7 @@ def main():
     parser.add_argument("--input", "-i", type=str, required=True)
     args = parser.parse_args()
     user_input = args.input
-    
+
     # print("List of products from input:", user_input)
     generate_recipe(user_input)
 

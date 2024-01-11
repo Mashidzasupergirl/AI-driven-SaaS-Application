@@ -1,9 +1,11 @@
 from typing import Union
 from recipe_generator import generate_recipe
+from mangum import Mangum
 
 from fastapi import FastAPI
 
 app = FastAPI()
+handler = Mangum(app)
 
 
 @app.get("/")
